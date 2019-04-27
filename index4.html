@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebAssembly Demo 4 - simple addition function with 3 parameters</title>
+        <link href="data:image/x-icon;" rel="shortcut icon">
+    </head>
+    <body>
+        <script>
+            (async () => {
+                const fetchPromise = fetch('add3.wasm');
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const result = instance.exports.add(75, -7, 267);
+                const outputElement = document.createElement('p');
+                outputElement.innerHTML = result;
+                const element = document.body;
+                element.appendChild(outputElement);
+            })();
+        </script>
+    </body>
+</html>

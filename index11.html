@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebAssembly Demo 11 - fibonacci (recursive function)</title>
+        <link href="data:image/x-icon;" rel="shortcut icon">
+    </head>
+    <body>
+        <script>
+            (async () => {
+                const fetchPromise = fetch('fib.wasm');
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const element = document.body;
+                const outputElement = document.createElement('p');
+                outputElement.innerHTML = instance.exports.fib(7);
+                element.appendChild(outputElement);
+            })();
+        </script>
+    </body>
+</html>

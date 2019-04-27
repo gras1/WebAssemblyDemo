@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebAssembly Demo 9 - table example</title>
+        <link href="data:image/x-icon;" rel="shortcut icon">
+    </head>
+    <body>
+        <script>
+            (async () => {
+                const fetchPromise = fetch('tableexample.wasm');
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const element = document.body;
+                const outputElement1 = document.createElement('p');
+                outputElement1.innerHTML = instance.exports.callByIndex(0);
+                element.appendChild(outputElement1);
+                const outputElement2 = document.createElement('p');
+                outputElement2.innerHTML = instance.exports.callByIndex(1);
+                element.appendChild(outputElement2);
+            })();
+        </script>
+    </body>
+</html>

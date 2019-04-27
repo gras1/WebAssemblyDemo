@@ -1,0 +1,16 @@
+{
+  "name": "webassemblydemo1",
+  "version": "1.0.0",
+  "description": "Create a basic WebAssembly .wasm file and demo calling it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Graham Fearn",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "util": "^0.11.1",
+    "wabt": "^1.0.10"
+  }
+}

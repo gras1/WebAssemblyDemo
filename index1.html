@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebAssembly Demo 1</title>
+        <link href="data:image/x-icon;" rel="shortcut icon">
+    </head>
+    <body>
+        <script>
+               (async () => {
+                const fetchPromise = fetch('theanswer.wasm');
+                const { wasmInstance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const result = wasmInstance.exports.theanswertolifetheuniverseandeverything();
+                const outputElement = document.createElement('p');
+                outputElement.innerHTML = result;
+                const element = document.body;
+                element.appendChild(outputElement);
+            })();
+        </script>
+    </body>
+</html>

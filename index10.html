@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>WebAssembly Demo 10 - using WebAssembly.Table</title>
+        <link href="data:image/x-icon;" rel="shortcut icon">
+    </head>
+    <body>
+        <script>
+            let tbl = new WebAssembly.Table({initial:2, element:"anyfunc"});
+            var importObject = {
+                js: {
+                    table: tbl
+                }
+            };
+            (async () => {
+                const fetchPromise = fetch('tableexample2.wasm');
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise, importObject);
+                const element = document.body;
+                const outputElement1 = document.createElement('p');
+                outputElement1.innerHTML = tbl.get(0)();
+                element.appendChild(outputElement1);
+                const outputElement2 = document.createElement('p');
+                outputElement2.innerHTML = tbl.get(1)();
+                element.appendChild(outputElement2);
+            })();
+        </script>
+    </body>
+</html>
