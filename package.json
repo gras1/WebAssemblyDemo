@@ -1,7 +1,7 @@
 {
-  "name": "webassemblydemo1",
+  "name": "WebAssemblyDemo",
   "version": "1.0.0",
-  "description": "Create a basic WebAssembly .wasm file and demo calling it",
+  "description": "Demonstrates basic abilities of WebAssembly through examples of wat files",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
