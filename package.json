@@ -1,5 +1,5 @@
 {
-  "name": "WebAssemblyDemo",
+  "name": "webassemblydemo",
   "version": "1.0.0",
   "description": "Demonstrates basic abilities of WebAssembly through examples of wat files",
   "main": "index.js",
