@@ -1,5 +1,5 @@
 (module
-   (global $g (import "js" "global") (mut i32))
+   (global $g (mut i32) (i32.const 0))
    (func (export "getGlobal") (result i32)
         (get_global $g))
    (func (export "incGlobal")
