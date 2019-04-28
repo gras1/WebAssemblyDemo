@@ -1,8 +1,18 @@
 const fs = require("fs");
-const buf = fs.readFileSync("./tableexample.wasm");
+const buf = fs.readFileSync("./usingglobal2.wasm");
 const wasmModule = new WebAssembly.Module(new Uint8Array(buf));
 
-const wasmInstance = new WebAssembly.Instance(wasmModule);
+let myGlobal = new WebAssembly.Global({value:'i32', mutable:true}, 0);
+var importObject = {
+    js: {
+        global: myGlobal
+    }
+};
 
-console.log(wasmInstance.exports.callByIndex(0));
-console.log(wasmInstance.exports.callByIndex(1));
+const wasmInstance = new WebAssembly.Instance(wasmModule, importObject);
+
+wasmInstance.exports.incGlobal();
+wasmInstance.exports.incGlobal();
+wasmInstance.exports.incGlobal();
+wasmInstance.exports.incGlobal();
+console.log(wasmInstance.exports.getGlobal());
