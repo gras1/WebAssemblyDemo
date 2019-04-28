@@ -2,21 +2,29 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>WebAssembly Demo 9 - table example</title>
+        <title>WebAssembly Demo 9 - using WebAssembly.Global</title>
         <link href="data:image/x-icon;" rel="shortcut icon">
     </head>
     <body>
         <script>
+            let myGlobal = new WebAssembly.Global({value:'i32', mutable:true}, 0);
+            var importObject = {
+                js: {
+                    global: myGlobal
+                }
+            };
+
             (async () => {
-                const fetchPromise = fetch('tableexample.wasm');
-                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const fetchPromise = fetch('usingglobal2.wasm');
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise, importObject);
+                instance.exports.incGlobal();
+                instance.exports.incGlobal();
+                instance.exports.incGlobal();
+                instance.exports.incGlobal();
+                const outputElement = document.createElement('p');
+                outputElement.innerHTML = instance.exports.getGlobal();;
                 const element = document.body;
-                const outputElement1 = document.createElement('p');
-                outputElement1.innerHTML = instance.exports.callByIndex(0);
-                element.appendChild(outputElement1);
-                const outputElement2 = document.createElement('p');
-                outputElement2.innerHTML = instance.exports.callByIndex(1);
-                element.appendChild(outputElement2);
+                element.appendChild(outputElement);
             })();
         </script>
     </body>
