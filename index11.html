@@ -2,18 +2,27 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>WebAssembly Demo 11 - fibonacci (recursive function)</title>
+        <title>WebAssembly Demo 11 - using WebAssembly.Table</title>
         <link href="data:image/x-icon;" rel="shortcut icon">
     </head>
     <body>
         <script>
+            let tbl = new WebAssembly.Table({initial:2, element:"anyfunc"});
+            var importObject = {
+                js: {
+                    table: tbl
+                }
+            };
             (async () => {
-                const fetchPromise = fetch('fib.wasm');
-                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const fetchPromise = fetch('tableexample2.wasm');
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise, importObject);
                 const element = document.body;
-                const outputElement = document.createElement('p');
-                outputElement.innerHTML = instance.exports.fib(7);
-                element.appendChild(outputElement);
+                const outputElement1 = document.createElement('p');
+                outputElement1.innerHTML = tbl.get(0)();
+                element.appendChild(outputElement1);
+                const outputElement2 = document.createElement('p');
+                outputElement2.innerHTML = tbl.get(1)();
+                element.appendChild(outputElement2);
             })();
         </script>
     </body>
