@@ -1,9 +1,9 @@
 (module
   (type $t0 (func (param i32) (result i32)))
   (func $fib (export "fib") (type $t0) (param $n i32) (result i32)
-    (if $I0 (result i32)
+    (if (result i32)
       (i32.lt_s
-        (local.get $n)
+        (get_local $n)
         (i32.const 2))
       (then
         (i32.const 1))
@@ -11,10 +11,10 @@
         (i32.add
           (call $fib
             (i32.sub
-              (local.get $n)
+              (get_local $n)
               (i32.const 2)))
           (call $fib
             (i32.sub
-              (local.get $n)
+              (get_local $n)
               (i32.const 1)))))))
 )
