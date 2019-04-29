@@ -9,8 +9,8 @@
         <script>
                (async () => {
                 const fetchPromise = fetch('theanswer.wasm');
-                const { wasmInstance } = await WebAssembly.instantiateStreaming(fetchPromise);
-                const result = wasmInstance.exports.theanswertolifetheuniverseandeverything();
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const result = instance.exports.theanswertolifetheuniverseandeverything();
                 const outputElement = document.createElement('p');
                 outputElement.innerHTML = result;
                 const element = document.body;
