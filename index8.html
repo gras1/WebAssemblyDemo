@@ -10,10 +10,10 @@
             (async () => {
                 const fetchPromise = fetch('usingglobal.wasm');
                 const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
-                instance.exports.incGlobal();
-                instance.exports.incGlobal();
-                instance.exports.incGlobal();
-                instance.exports.incGlobal();
+                instance.exports.incrementGlobal();
+                instance.exports.incrementGlobal();
+                instance.exports.incrementGlobal();
+                instance.exports.incrementGlobal();
                 const outputElement = document.createElement('p');
                 outputElement.innerHTML = instance.exports.getGlobal();;
                 const element = document.body;
