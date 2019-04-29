@@ -7,14 +7,17 @@
     </head>
     <body>
         <script>
-            (async () => {
+            async function getFibonacciNumber() {
                 const fetchPromise = fetch('fib.wasm');
                 const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
                 const element = document.body;
-                const outputElement = document.createElement('p');
-                outputElement.innerHTML = instance.exports.fib(7);
+                const outputElement = document.getElementById('fibonacciNumber');
+                outputElement.innerHTML = instance.exports.fib(document.getElementById('fibonacciSequenceNumber').value);
                 element.appendChild(outputElement);
-            })();
+            }
         </script>
+        <input id="fibonacciSequenceNumber" autocomplete="off" pattern="[0-9]{3}" title="The nth sequence in the fibonacci series" />
+        <button onclick="getFibonacciNumber()">Get Number</button>
+        <p id="fibonacciNumber"></p>
     </body>
 </html>
