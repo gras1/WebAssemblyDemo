@@ -9,8 +9,8 @@
         <script>
             (async () => {
                 const fetchPromise = fetch('add.wasm');
-                const { wasmInstance } = await WebAssembly.instantiateStreaming(fetchPromise);
-                const result = wasmInstance.exports.add(75, -7);
+                const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+                const result = instance.exports.add(75, -7);
                 const outputElement = document.createElement('p');
                 outputElement.innerHTML = result;
                 const element = document.body;
